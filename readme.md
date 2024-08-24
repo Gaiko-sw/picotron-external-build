@@ -3,7 +3,7 @@ This is a pair of scripts for turning your picotron cart into a folder
 of lua files you can edit externally and a skeleton p64 cart, that you
 can open in picotron to edit other assets.
 
->	❗️
+>	❗️ Warning
 >
 >	It is HIGHLY RECOMMENDED that you only run these scripts on backup
 >	copies of your files. They have not been tested in real use, and
@@ -33,6 +33,17 @@ Example:
 ```
 python picotron_export.py ./game.p64 ./external_build/
 ```
+
+### Making changes
+
+After exporting the project directory, you can edit the skel.p64 file directly
+in picotron to build your assets. These aren't touched by the build step.
+Note however that you can not make any code changes.
+
+Additionally, you can make code changes in an external editor to any of the lua
+files in the project directory. The build step will update the pod line at the
+top of each, and also generate a new one for any brand new files you create. You
+shouldn't edit or delete the pod lines yourself
 
 
 ### picotron_build.py
