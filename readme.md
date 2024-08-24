@@ -25,6 +25,10 @@ The arguments are
 	The directory which will receive the new lua and skel.p64 files.
 	Recommended either empty or new
 
+Example:
+```
+python picotron_export.py ./game.p64 ./external_build/
+```
 
 === picotron_build.py
 After creating an export dir containing lua files and the skel.p64 file, run the build script to put them back together.
@@ -47,3 +51,8 @@ The arguments are
 - output_cart
 	The path to output the final to. 
 	Will default to `out.p64` inside the `input_directory` if omitted.
+
+Example
+```
+python picotron_build.py ./external_build/ ./external_build/game_skel.p64 ./game_final.p64
+```
