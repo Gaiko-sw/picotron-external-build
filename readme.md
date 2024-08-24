@@ -1,4 +1,4 @@
-= Picotron External Build
+# Picotron External Build
 This is a pair of scripts for turning your picotron cart into a folder
 of lua files you can edit externally and a skeleton p64 cart, that you
 can open in picotron to edit other assets.
@@ -10,9 +10,9 @@ can open in picotron to edit other assets.
 >	could very well irreplaceably damage files at this stage.
 >	
 
-== Usage
+## Usage
 
-=== picotron_export.py
+### picotron_export.py
 
 You must first use the export tool on a picotron cart to generate a skel.p64 file. This at least adds the @@code tag so the build script knows where to add your lua files back. It will also take any code already in the cart and break it up into a set of lua files.
 
@@ -35,7 +35,7 @@ python picotron_export.py ./game.p64 ./external_build/
 ```
 
 
-=== picotron_build.py
+### picotron_build.py
 
 After creating an export dir containing lua files and the skel.p64 file, run the build script to put them back together.
 The script will also paste in any new files created after the export (though you will still need to `include` them in your main.lua).
