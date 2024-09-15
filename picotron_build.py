@@ -11,20 +11,20 @@ DATE_FORMAT = "%Y-%m-%d %H:%M:%S"
 @dataclass
 class Args:
     input_directory: Path
-    input_cart: Path
+    input_skel: Path
     output_cart: Path
 
 def main(args: Args):
     if not args.input_directory.is_dir():
         raise Exception("Input directory was not dir")
 
-    if not args.input_cart.is_file():
-        if not (args.input_cart.with_suffix(".p64").is_file()):
+    if not args.input_skel.is_file():
+        if not (args.input_skel.with_suffix(".p64").is_file()):
             raise Exception("Input cart was not cart")
         
     args.output_cart = args.output_cart.with_suffix(".p64")
 
-    with open(args.input_cart) as f:
+    with open(args.input_skel) as f:
         cart_content = f.read()
 
     if not (match := re.search(":: main.lua\n@@code", cart_content)):
@@ -108,15 +108,15 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(
         description="Picotron cartridge compiler"
     )
-    parser.add_argument('input_directory', type=Path, help="Directory containing lua files to compile into Picotron cartridge")
-    parser.add_argument('input_cart', type=Path, help="Picotron skeleton cart, with @@code annotation, from picotron_export.py")
+    parser.add_argument('input_directory', type=Path, help="Directory containing lua source files to compile into Picotron cartridge")
+    parser.add_argument('input_skel', type=Path, help="Picotron skeleton cart, with @@code annotation, from picotron_export.py (not the original Picotron cart)")
     parser.add_argument('output_cart', type=Path, help="Name of file to output")
     args = parser.parse_args()
 
-    if not args.input_cart:
-        input_cart = args.input_directory / "skel.p64"
+    if not args.input_skel:
+        input_skel = args.input_directory / "skel.p64"
     else:
-        input_cart = args.input_cart
+        input_skel = args.input_skel
 
     if not args.output_cart:
         output_cart = args.input_directory / "out.p64"
@@ -125,8 +125,8 @@ if __name__ == "__main__":
 
     main(Args(
         input_directory=args.input_directory,
-        input_cart=args.input_cart,
-        output_file=output_cart,
+        input_skel=args.input_skel,
+        output_cart=output_cart,
 
     ))
     
